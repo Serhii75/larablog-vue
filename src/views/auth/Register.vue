@@ -1,19 +1,50 @@
 <template>
   <div class="card auth-form">
     <div class="card-content">
-      <div class="card-title">Sign in</div>
-      <alert v-if="message" :message="message" type="error"/>
+      <div class="card-title">Sign up</div>
       <form action="#" @submit.prevent="submit">
+        <div class="input-field">
+          <i class="material-icons prefix">account_box</i>
+          <input id="name" type="text" class="validate" v-model="name">
+          <label for="name">Name</label>
+          <span
+            class="helper-text error-text"
+            data-error="wrong"
+            v-if="errors.name"
+          >{{ errors.name[0] }}</span>
+        </div>
+
         <div class="input-field">
           <i class="material-icons prefix">email</i>
           <input id="email" type="email" class="validate" v-model="email">
           <label for="email">Email</label>
+          <span
+            class="helper-text error-text"
+            data-error="wrong"
+            v-if="errors.email"
+          >{{ errors.email[0] }}</span>
         </div>
 
         <div class="input-field">
           <i class="material-icons prefix">vpn_key</i>
           <input id="password" type="password" class="validate" v-model="password">
           <label for="password">Password</label>
+          <span
+            class="helper-text error-text"
+            data-error="wrong"
+            v-if="errors.password"
+          >{{ errors.password[0] }}</span>
+        </div>
+
+        <div class="input-field">
+          <i class="material-icons prefix">vpn_key</i>
+          <input
+            id="password_confirmation"
+            type="password"
+            class="validate"
+            v-model="password_confirmation"
+          >
+          <label for="password">Confirm Password</label>
         </div>
 
         <div class="btn-group">
@@ -33,30 +64,29 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Alert from '../../components/Alert'
 
 export default {
   data() {
     return {
+      name: null,
       email: null,
       password: null,
-      errors: [],
-      message: null
+      password_confirmation: null,
+      errors: []
     }
-  },
-  components: {
-    alert: Alert
   },
   methods: {
     ...mapActions({
-      login: 'auth/login'
+      register: 'auth/register'
     }),
     submit() {
       this.clearErrors()
-      this.login({
+      this.register({
         payload: {
+          name: this.name,
           email: this.email,
-          password: this.password
+          password: this.password,
+          password_confirmation: this.password_confirmation
         },
         context: this
       }).then(() => {
@@ -65,7 +95,6 @@ export default {
     },
     clearErrors() {
       this.errors = []
-      this.message = null
     }
   }
 }
@@ -87,6 +116,10 @@ export default {
   .btn-group {
     display: flex;
     justify-content: space-between;
+  }
+
+  .error-text {
+    color: red;
   }
 }
 </style>

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'default'
+  name: 'auth'
 }
 </script>
 

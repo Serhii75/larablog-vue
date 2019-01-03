@@ -13,11 +13,17 @@
           <li>
             <router-link to="/about">About</router-link>|
           </li>
-          <li>
+          <li v-if="user.authenticated">
+            <a href="#">Hi, {{ user.data.name }}</a>
+          </li>
+          <li v-if="user.authenticated">
+            <a class="waves-effect grey darken-1 btn" href="#" @click.prevent="logout">Sign out</a>
+          </li>
+          <li v-if="!user.authenticated">
             <router-link class="waves-effect grey darken-1 btn" to="/login">Sign in</router-link>
           </li>
-          <li>
-            <a class="waves-effect grey darken-1 btn" href="#">Sign up</a>
+          <li v-if="!user.authenticated">
+            <router-link class="waves-effect grey darken-1 btn" to="/register">Sign up</router-link>
           </li>
         </ul>
       </div>
@@ -29,8 +35,18 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  name: 'default'
+  name: 'default',
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
+  methods: {
+    ...mapActions({
+      logout: 'auth/logout'
+    })
+  }
 }
 </script>
 

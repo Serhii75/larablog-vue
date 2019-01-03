@@ -16,6 +16,30 @@ export default new Router({
       }
     },
     {
+      path: '/categories',
+      name: 'categories',
+      component: () => import('./views/Home'),
+      meta: {
+        layout: 'default'
+      }
+    },
+    {
+      path: '/categories/:categoryId',
+      name: 'category',
+      component: () => import('./views/Home'),
+      meta: {
+        layout: 'default'
+      }
+    },
+    {
+      path: '/posts/new',
+      name: 'posts.new',
+      component: () => import('./views/posts/NewPost.vue'),
+      meta: {
+        layout: 'default'
+      }
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('./views/About'),
@@ -27,6 +51,14 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import('./views/auth/Login.vue'),
+      meta: {
+        layout: 'auth'
+      }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('./views/auth/Register.vue'),
       meta: {
         layout: 'auth'
       }
