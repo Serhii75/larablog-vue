@@ -2,13 +2,13 @@
   <div>
     <!-- <h1 text-align="center">Posts List</h1> -->
     <div class="row flex-row">
-      <post v-for="post in posts.data" :key="post.id" :post="post"></post>
+      <post-preview v-for="post in posts.data" :key="post.id" :post="post"></post-preview>
     </div>
   </div>
 </template>
 
 <script>
-import Post from '../../components/Post.vue'
+import PostPreview from '../../components/PostPreview.vue'
 
 export default {
   props: {
@@ -18,7 +18,7 @@ export default {
     }
   },
   components: {
-    post: Post
+    'post-preview': PostPreview
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="col s12 m12 l6">
-    <a href="#"
+    <router-link :to="{ name: 'posts.show', params: {id: post.id} }"
       :title="post.title"
       class="card z-depth-3 item-preview"
     >
@@ -11,10 +11,11 @@
 
         <div class="item-content">
           <h3 class="card-title">{{ post.title }}</h3>
-          <p></p>{{ post.intro }}
+          <div><time>{{ post.created_at }}</time> | {{ post.user.name }}</div>
+          <p>{{ post.intro }}</p>
         </div>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -55,10 +56,16 @@ export default {
 
   .card-title {
     margin-top: 0;
+    margin-bottom: 0.25rem;
   }
 
   .item-content {
     padding: 1.5rem;
+
+    & > div {
+      font-size: 0.85rem;
+      color: rgba(0,0,0,.66);
+    }
   }
 
   &:hover {

@@ -32,6 +32,14 @@ export default new Router({
       }
     },
     {
+      path: '/posts/:id',
+      name: 'posts.show',
+      component: () => import('./views/posts/Post.vue'),
+      meta: {
+        layout: 'default'
+      }
+    },
+    {
       path: '/posts/new',
       name: 'posts.new',
       component: () => import('./views/posts/NewPost.vue'),
