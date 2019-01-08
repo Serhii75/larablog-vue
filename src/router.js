@@ -40,14 +40,6 @@ export default new Router({
       }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About'),
-      meta: {
-        layout: 'default'
-      }
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import('./views/auth/Login.vue'),

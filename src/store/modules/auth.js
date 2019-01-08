@@ -2,9 +2,10 @@ import { isEmpty } from 'lodash'
 import { setHttpToken } from '../../helpers'
 import localforage from 'localforage'
 import router from '../../router'
+import config from '../../config'
 import axios from 'axios'
 
-const uri = 'http://larablog.xx/'
+// const uri = 'http://larablog.xx/'
 
 const state = {
   user: {
@@ -21,7 +22,7 @@ const getters = {
 
 const actions = {
   register: ({ dispatch }, { payload, context }) => {
-    let endpoint = uri + 'api/register'
+    let endpoint = config.uri + 'register'
     return axios
       .post(endpoint, payload)
       .then(response => {
@@ -33,7 +34,7 @@ const actions = {
   },
 
   login: ({ dispatch }, { payload, context }) => {
-    let endpoint = uri + 'api/login'
+    let endpoint = config.uri + 'login'
     return axios
       .post(endpoint, payload)
       .then(response => {
@@ -48,7 +49,7 @@ const actions = {
   },
 
   logout: ({ dispatch }) => {
-    let endpoint = uri + 'api/logout'
+    let endpoint = config.uri + 'logout'
     return axios
       .post(endpoint)
       .then(() => {
@@ -61,7 +62,7 @@ const actions = {
   },
 
   fetchUser: ({ commit }) => {
-    let endpoint = uri + 'api/me'
+    let endpoint = config.uri + 'me'
     return axios.get(endpoint).then(response => {
       commit('setAuthenticated', true)
       commit('setUserData', response.data.data)

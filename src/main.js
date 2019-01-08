@@ -8,6 +8,7 @@ import localforage from 'localforage'
 
 import 'materialize-css'
 import 'materialize-css/dist/css/materialize.css'
+import './assets/sass/app.scss'
 
 // Vue.use(VueAxios, axios)
 

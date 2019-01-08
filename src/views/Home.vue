@@ -1,17 +1,34 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <posts-list :posts="posts"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapActions, mapGetters } from 'vuex'
+import PostsList from '@/views/posts/PostsList.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    'posts-list': PostsList
+  },
+  computed: mapGetters({
+    posts: 'posts/posts'
+  }),
+  created() {
+    this.setData()
+  },
+  watch: {
+    $route: 'setData'
+  },
+  methods: {
+    ...mapActions({
+      fetchPosts: 'posts/fetchPosts'
+    }),
+    setData() {
+      this.fetchPosts({ context: this })
+    }
   }
 }
 </script>

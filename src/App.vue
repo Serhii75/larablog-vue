@@ -12,8 +12,3 @@ export default {
   components: { VueExtendLayouts }
 }
 </script>
-
-<style lang="scss">
-#app {
-}
-</style>
